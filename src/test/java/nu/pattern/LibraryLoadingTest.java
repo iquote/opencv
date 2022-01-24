@@ -1,5 +1,14 @@
 package nu.pattern;
 
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,10 +16,6 @@ import org.junit.runners.JUnit4;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
-
-import java.net.URLClassLoader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @see <a href="https://github.com/PatternConsulting/opencv/issues/7">Issue 7</a>
@@ -42,8 +47,17 @@ public class LibraryLoadingTest {
   }
 
   public static class TestClassLoader extends URLClassLoader {
-    public TestClassLoader() {
-      super(((URLClassLoader) getSystemClassLoader()).getURLs());
+    public TestClassLoader() throws IOException {
+      super(resources());
+    }
+    
+    private static URL[] resources() throws IOException {
+    	List<URL> urls = new ArrayList<>();
+    	Enumeration<URL> resources = getSystemClassLoader().getResources("");
+    	while(resources.hasMoreElements()) {
+    		urls.add(resources.nextElement());
+    	}
+    	return urls.toArray(new URL[] {});
     }
 
     @Override
@@ -58,10 +72,11 @@ public class LibraryLoadingTest {
 
   /**
    * Multiple {@link ClassLoader} instances should be able to successfully load the native library, and call OpenCV APIs.
+ * @throws IOException 
    */
   @Test
   @SuppressWarnings("unchecked")
-  public void multipleClassLoaders() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+  public void multipleClassLoaders() throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {
     final ClassLoader loader0 = new TestClassLoader();
     final ClassLoader loader1 = new TestClassLoader();
 

@@ -1,8 +1,10 @@
-# OpenCV 3.2.0 (packaged by [OpenPnP](http://openpnp.org))
+# OpenCV 3.4.16 (packaged by [OpenPnP](http://openpnp.org))
 
 [OpenCV](http://opencv.org) Java bindings packaged with native libraries, seamlessly delivered as a turn-key Maven dependency.
 
 ## Fork Notes
+
+Only the Linux and Windows shared libraries were updated from 3.2.0 to 3.4.16.
 
 ### Soft Fork
 
@@ -46,9 +48,9 @@ OpenPnP's OpenCV package is added to your project as any other dependency.
     <!-- ... -->
     
     <dependency>
-      <groupId>org.openpnp</groupId>
+      <groupId>io.github.iquote</groupId>
       <artifactId>opencv</artifactId>
-      <version>3.2.0-0</version>
+      <version>3.4.16-0</version>
     </dependency>
     
     <!-- ... -->
@@ -103,12 +105,8 @@ The following platforms are supported by this package:
 
 OS | Architecture
 --- | ---
-OS X | x86_32
-OS X | x86_64
 Linux | x86_64
 Linux | x86_32
-Windows | x86_32
-Windows | x86_64
 
 If you can help create binaries for additional platforms, please see notes under [_Contributing_](#contributing).
 

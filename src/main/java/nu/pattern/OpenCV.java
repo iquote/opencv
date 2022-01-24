@@ -1,7 +1,6 @@
 package nu.pattern;
 
 import org.opencv.core.Core;
-import sun.reflect.CallerSensitive;
 
 import java.io.File;
 import java.io.IOException;
@@ -308,7 +307,6 @@ public class OpenCV {
   /**
    * Selects the appropriate packaged binary, extracts it to a temporary location (which gets deleted when the JVM shuts down), and returns a {@link Path} to that file.
    */
-  @CallerSensitive
   private static Path extractNativeBinary() {
     final OS os = OS.getCurrent();
     final Arch arch = Arch.getCurrent();
@@ -325,10 +323,10 @@ public class OpenCV {
       case LINUX:
         switch (arch) {
           case X86_32:
-            location = "/nu/pattern/opencv/linux/x86_32/libopencv_java320.so";
+            location = "/nu/pattern/opencv/linux/x86_32/libopencv_java3416.so";
             break;
           case X86_64:
-            location = "/nu/pattern/opencv/linux/x86_64/libopencv_java320.so";
+            location = "/nu/pattern/opencv/linux/x86_64/libopencv_java3416.so";
             break;
           default:
             throw new UnsupportedPlatformException(os, arch);
@@ -346,10 +344,10 @@ public class OpenCV {
       case WINDOWS:
           switch (arch) {
             case X86_32:
-              location = "/nu/pattern/opencv/windows/x86_32/opencv_java320.dll";
+              location = "/nu/pattern/opencv/windows/x86_32/opencv_java3416.dll";
               break;
             case X86_64:
-              location = "/nu/pattern/opencv/windows/x86_64/opencv_java320.dll";
+              location = "/nu/pattern/opencv/windows/x86_64/opencv_java3416.dll";
               break;
             default:
               throw new UnsupportedPlatformException(os, arch);
